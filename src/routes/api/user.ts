@@ -1,13 +1,10 @@
 import { Router } from 'express'
 const router: Router = Router()
 
-/*
-    getUser, loginUser
-*/
-
-import { getUser, loginUser } from "../../controllers/user";
+import { getUser, loginUser, getUserApp } from "../../controllers/user";
 
 router.post("/login", loginUser)
-router.post("/", getUser)
+router.get("/@me", getUser)
+router.post("/", getUserApp)
 
 export default router

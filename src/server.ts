@@ -1,9 +1,11 @@
 import express from 'express'
-
+import { config } from 'dotenv'
 import connectDB from '../config/database'
-import auth from './routes/api/auth'
 import user from './routes/api/user'
-import profile from './routes/api/profile'
+import tracks from "./routes/api/tracks";
+import morgan from "morgan";
+
+config({ path: './config/.env' })
 
 const app = express()
 
@@ -14,17 +16,17 @@ connectDB()
 app.set('port', process.env.PORT || 5000)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(morgan("dev"));
 
 // @route   GET /
 // @desc    Test Base API
 // @access  Public
 app.get('/', (_req, res) => {
-  res.send('API Running')
+  res.send('api up and running')
 })
 
-app.use('/api/auth', auth)
 app.use('/api/user', user)
-app.use('/api/profile', profile)
+app.use("/api/tracks", tracks)
 
 const port = app.get('port')
 const server = app.listen(port, () =>

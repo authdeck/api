@@ -27,9 +27,40 @@ export interface IUser extends Document {
   blockchainScore: number
 }
 
-// write schema from interface i gtg
-const userSchema: Schema = new Schema({})
+const userSchema: Schema = new Schema({
+  connectedWallet: [
+    {
+      chain: {
+        type: String,
+      },
+      address: {
+        type: String,
+      },
+    },
+  ],
+  creditScore: {
+    type: Number,
+  },
+  tracksCompleted: [
+    {
+      name: {
+        type: String,
+      },
+      completedOn: {
+        type: String,
+      },
+      score: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+  blockchainScore: {
+    type: Number,
+  }
+})
 
+// @ts-ignore
 const User: Model<IUser> = model('User', userSchema)
 
 export default User

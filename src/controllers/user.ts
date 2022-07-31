@@ -7,6 +7,16 @@ import User, { IUser } from '../models/User'
 // @route   POST /api/user
 // @desc    Get user data ( used by dapps )
 // @access  Restricted
+const getUserApp = async (req: Request, res: Response, next: NextFunction) => {
+  return res.status(HttpStatusCodes.OK).json({
+    success: true,
+    data: {},
+  })
+}
+
+// @route   POST /api/@me
+// @desc    Get logged in user data
+// @access  Private
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
   return res.status(HttpStatusCodes.OK).json({
     success: true,
@@ -24,4 +34,4 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-export { getUser, loginUser }
+export { getUserApp, getUser, loginUser }
