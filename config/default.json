@@ -1,5 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://root:1234@devconnector-ejkgk.mongodb.net/test?retryWrites=true",
-  "jwtSecret": "jwtSecretToken",
-  "jwtExpiration": 360000
-}
