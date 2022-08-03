@@ -2,8 +2,8 @@ import express from 'express'
 import { config } from 'dotenv'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
-import user from './routes/api/user'
-import tracks from './routes/api/tracks'
+import user from './routes/api/user.js'
+import tracks from './routes/api/tracks.js'
 
 config({ path: './config/.env' })
 

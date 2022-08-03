@@ -5,7 +5,7 @@ const router = Router()
     verifyTwitter, getBlockchainScore
 */
 
-import { verifyTwitter, getBlockchainScore } from '../../controllers/tracks'
+import { verifyTwitter, getBlockchainScore } from '../../controllers/tracks.js'
 
 router.post('/twitter', verifyTwitter)
 router.post('/blockchain', getBlockchainScore)

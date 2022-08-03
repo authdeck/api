@@ -1,5 +1,5 @@
 import HttpStatusCodes from 'http-status-codes'
-import UserModel from '../models/User'
+import UserModel from '../models/User.js'
 import { ETHAuth } from '@0xsequence/ethauth'
 import jwt from 'jsonwebtoken'
 
