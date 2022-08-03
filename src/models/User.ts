@@ -28,6 +28,7 @@ export interface IUser extends Document {
 }
 
 const userSchema: Schema = new Schema({
+  /*
   connectedWallet: [
     {
       chain: {
@@ -38,8 +39,12 @@ const userSchema: Schema = new Schema({
       },
     },
   ],
+  */
+  // only eth for now
+  address: String,
   creditScore: {
     type: Number,
+    default: 0,
   },
   tracksCompleted: [
     {
@@ -57,7 +62,8 @@ const userSchema: Schema = new Schema({
   ],
   blockchainScore: {
     type: Number,
-  }
+    default: 0,
+  },
 })
 
 // @ts-ignore
