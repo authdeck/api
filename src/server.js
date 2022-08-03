@@ -1,6 +1,6 @@
 import express from 'express'
 import { config } from 'dotenv'
-import connectDB from '../config/database'
+import mongoose from 'mongoose'
 import user from './routes/api/user'
 import tracks from './routes/api/tracks'
 import morgan from 'morgan'
@@ -8,10 +8,16 @@ import morgan from 'morgan'
 config({ path: './config/.env' })
 
 const app = express()
+console.log('wtf')
 
 // Connect to MongoDB
-connectDB()
-
+mongoose.connect(process.env.MONGO_URI, (err) => {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log('Connected to MongoDB')
+  }
+})
 // Express configuration
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

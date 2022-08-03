@@ -9,7 +9,7 @@ const connectDB = async () => {
       useFindAndModify: false,
       useUnifiedTopology: true,
     }
-    connect(mongoURI, options, () => {
+    await connect(mongoURI, options, () => {
       console.log('MongoDB Connected...')
     })
   } catch (err) {

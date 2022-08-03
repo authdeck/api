@@ -1,35 +1,22 @@
 {
-  "name": "authdeck",
-  "version": "0.0.1",
-  "description": "verification on chain",
-  "author": "SoulNinja-dev",
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "tsc": "tsc",
-    "watch-tsc": "tsc -w",
-    "deploy": "node dist/src/server.js",
-    "watch-deploy": "nodemon dist/src/server.js",
-    "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
-    "start": "npm run deploy",
-    "heroku-postbuild": "npm run tsc"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "@0xsequence/ethauth": "^0.7.0",
     "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
     "express": "^4.18.1",
     "http-status-codes": "^2.2.0",
-    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
-    "morgan": "^1.10.0",
-    "request": "^2.88.2",
-    "typescript": "^4.7.4"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/jsonwebtoken": "^8.5.8",
-    "@types/mongoose": "^5.11.97",
-    "@types/morgan": "^1.9.3",
-    "concurrently": "^7.3.0",
     "nodemon": "^2.0.19"
   }
 }
