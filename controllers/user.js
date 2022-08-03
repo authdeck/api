@@ -6,8 +6,6 @@ import jwt from 'jsonwebtoken'
 const expireTime = 7 * 24 * 60 * 60
 // generate jwt token stored in cookie with the payload
 function generateJWTToken(payload) {
-  console.log(`signing payload: `)
-  console.log(payload)
   return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: expireTime })
 }
 
@@ -51,22 +49,17 @@ const loginUser = async (req, res, next) => {
     })
   }
 
-  console.log(await UserModel.countDocuments())
-
-  /*
-  let user: IUser
+  let user
   user = await UserModel.findOne({ address: proof.address })
   if (!user) {
     user = await UserModel.create({ address: proof.address })
   }
-  console.log(user)
-  const token = generateJWTToken(user._id)
-  */
+  const token = generateJWTToken({ id: user._id })
   return res.status(HttpStatusCodes.OK).json({
     status: 'ok',
     data: {
-      // token,
-      //user,
+      token,
+      user,
     },
   })
 }

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node test/index.js"
   },
   "dependencies": {
     "@0xsequence/ethauth": "^0.7.0",
