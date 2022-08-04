@@ -9,6 +9,9 @@ import getNFTs from "./NFTs.js";
 import arweave from "./arweave.js";
 import getEns from "./ens.js";
 import nativeBalance from "./nativeBalance.js";
+
+import { createRequire } from "module"; // Bring in the ability to create the 'require' method
+const require = createRequire(import.meta.url); // construct the require method
 const { compound } = require("../curated_theme_contracts.json");
 import age from "./age.js";
 
