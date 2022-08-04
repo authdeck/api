@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken'
 
 export default function (req, res, next) {
   // Get token from header
-  const token = req.header('x-auth-token')
+  const token = req.header('Authorization')
+  console.log(token);
 
   // Check if no token
   if (!token) {
@@ -16,7 +17,7 @@ export default function (req, res, next) {
   try {
     const secret = process.env.JWT_SECRET
     const payload = jwt.verify(token, secret)
-    req.userId = payload.userId
+    req.user = payload.id
     next()
   } catch (err) {
     res.status(HttpStatusCodes.UNAUTHORIZED).json({ msg: 'Token is not valid' })

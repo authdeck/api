@@ -20,4 +20,16 @@ const getBlockchainScore = async (req, res, next) => {
   })
 }
 
-export { verifyTwitter, getBlockchainScore }
+// @route   POST /api/tracks/captcha
+// @desc    Handle track submission for captcha
+// @access  Private
+const handleCaptcha = async (req, res, next) => {
+  // get data from frontend, add score to user
+
+  return res.status(HttpStatusCodes.OK).json({
+    success: true,
+    data: {},
+  })
+}
+
+export { verifyTwitter, getBlockchainScore, handleCaptcha }

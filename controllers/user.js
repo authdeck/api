@@ -13,6 +13,7 @@ function generateJWTToken(payload) {
 // @desc    Get user data ( used by dapps )
 // @access  Restricted
 const getUserApp = async (req, res, next) => {
+  // todo: API key, and log to app
   return res.status(HttpStatusCodes.OK).json({
     success: true,
     data: {},
@@ -23,10 +24,18 @@ const getUserApp = async (req, res, next) => {
 // @desc    Get logged in user data
 // @access  Private
 const getUser = async (req, res, next) => {
-  return res.status(HttpStatusCodes.OK).json({
-    success: true,
-    data: {},
-  })
+  const user = await UserModel.findById(req.user)
+  if (!user) {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({
+      status: 'error',
+      error: 'USER NOT FOUND',
+    })
+  } else {
+    return res.status(HttpStatusCodes.OK).json({
+      status: 'ok',
+      data: JSON.parse(JSON.stringify(user)),
+    })
+  }
 }
 
 // @route   POST /api/user/login

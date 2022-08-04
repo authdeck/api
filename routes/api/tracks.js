@@ -5,8 +5,13 @@ const router = Router()
     verifyTwitter, getBlockchainScore
 */
 
-import { verifyTwitter, getBlockchainScore } from '../../controllers/tracks.js'
+import {
+  verifyTwitter,
+  getBlockchainScore,
+  handleCaptcha,
+} from '../../controllers/tracks.js'
 
+router.post('/captcha', handleCaptcha)
 router.post('/twitter', verifyTwitter)
 router.post('/blockchain', getBlockchainScore)
 
