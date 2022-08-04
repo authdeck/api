@@ -1,9 +1,15 @@
-const curated_theme_contracts = require('../curated_theme_contracts.json')
-const themes = Object.keys(curated_theme_contracts)
+import { createRequire } from "module"; // Bring in the ability to create the 'require' method
+const require = createRequire(import.meta.url); // construct the require method
+const curated_theme_contracts = require("./curated_theme_contracts.json");
+import getJanamKundali from "./chainData.js";
+import findScore from "./findScore.js";
+import queryClients from "./functions/index.js";
 
-const blockchainScore = (address) => {
-  const query = cleanQueries(JSON.parse(process.env.QUERY))
-  const queries = Object.keys(query)
+const blockchainScore = async (address) => {
+  const query = cleanQueries(JSON.parse(process.env.QUERY));
+  const queries = Object.keys(query);
+
+  const data = {};
   const janamKundali = await getJanamKundali(address);
   await Promise.all(
     queries.map(async (queryy) => {
@@ -25,17 +31,20 @@ const blockchainScore = (address) => {
     }),
   ]);
   return finalScore;
-}
+};
 
 function cleanQueries(query) {
-  let cleaned = {}
+  let cleaned = {};
   Object.keys(query).forEach((key) => {
     if (typeof query[key] === Object) {
-      cleaned[key] = cleanQueries(query[key])
+      cleaned[key] = cleanQueries(query[key]);
     } else if (typeof query[key] === Array) {
+      console.log("");
     } else {
-      cleaned[key] = curated_theme_contracts[query[key]] || query[key]
+      cleaned[key] = curated_theme_contracts[query[key]] || query[key];
     }
-  })
-  return cleaned
+  });
+  return cleaned;
 }
+
+export default blockchainScore;
