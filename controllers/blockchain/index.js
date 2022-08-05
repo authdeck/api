@@ -4,21 +4,17 @@ const curated_theme_contracts = require('./curated_theme_contracts.json')
 import getJanamKundali from './chainData.js'
 import findScore from './findScore.js'
 import queryClients from './functions/index.js'
-
 const allowedQueries = Object.keys(queryClients)
 
 const blockchainScore = async (address) => {
-  console.log(allowedQueries)
   const query = cleanQueries(JSON.parse(process.env.QUERY))
   const queries = Object.keys(query)
-  console.log('queries', queries)
-  /*
+
   const errors = queries.filter((query) => !allowedQueries.includes(query))
   if (errors.length > 0) {
     console.log('QUERY NOT ALLOWED')
     return -1
   }
-  */
   const data = {}
   const janamKundali = await getJanamKundali(address)
   await Promise.all(
@@ -30,6 +26,7 @@ const blockchainScore = async (address) => {
       )
     })
   )
+
   const levels = {}
   Object.keys(data).forEach((query) => {
     levels[query] = findScore(query, data[query])

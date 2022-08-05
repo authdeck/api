@@ -1,21 +1,21 @@
-async function numberOfTransactions(txns, address, toOrFrom = "to") {
+async function numberOfTransactions(txns, address, toOrFrom = 'to') {
   if (address) {
-    let num_txns = 0;
-    if (typeof address == "string") {
+    let num_txns = 0
+    if (typeof address == 'string') {
       return txns.txns.filter((txn) => txn[`${toOrFrom}_address`] === address)
-        .length;
+        .length
     } else if (typeof address == Array) {
-      address.forEach((_address, item) => {
+      address.forEach((_address) => {
         num_txns =
           num_txns +
           txns.txns.filter((txn) => txn[`${toOrFrom}_address`] === _address)
-            .length;
-      });
+            .length
+      })
 
-      return num_txns;
+      return num_txns
     }
   }
-  return txns.txns.length;
+  return txns.txns.length
 }
 
-export default numberOfTransactions;
+export default numberOfTransactions

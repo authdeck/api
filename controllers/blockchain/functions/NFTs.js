@@ -2,7 +2,6 @@ import pkg from "axios";
 const { get } = pkg;
 
 async function getNFTs(address) {
-  console.log(address);
   try {
     const { data: x } = await get(
       `https://deep-index.moralis.io/api/v2/${address}/nft?chain=eth&format=decimal`,

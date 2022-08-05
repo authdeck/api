@@ -1,23 +1,22 @@
 async function numberOfNftTransactions(txns, query) {
-  let address;
+  let address
   if (query) {
-    address = query.address || query;
-    console.log(address)
-    let num_txns = 0;
-    if (typeof address === "string") {
+    address = query.address || query
+    let num_txns = 0
+    if (typeof address === 'string') {
       return txns.NFTs.filter(
         (txn) => txn.token_address.toLowerCase() === address.toLowerCase()
-      ).length;
+      ).length
     } else {
       address.map((a) => {
         num_txns += txns.NFTs.filter(
           (txn) => txn.token_address.toLowerCase() === a.toLowerCase()
-        ).length;
-      });
-      return num_txns;
+        ).length
+      })
+      return num_txns
     }
   }
-  return txns.NFTs.length;
+  return txns.NFTs.length
 }
 
-export default numberOfNftTransactions;
+export default numberOfNftTransactions

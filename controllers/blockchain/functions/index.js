@@ -43,7 +43,6 @@ const queries = {
 
   haveEns: async (txns, data, address) => {
     const x = await getEns(address)
-    console.log(x)
     return x
   },
 
@@ -56,7 +55,6 @@ const queries = {
 
   numberOfNFTsHeld: async (txns, data, address) => {
     const x = (await getNFTs(address)).number_of_NFTs
-    console.log(x)
     return x
   },
 

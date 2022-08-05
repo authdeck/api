@@ -17,7 +17,7 @@ const verifyTwitter = async (req, res) => {
 const getBlockchainScore = async (req, res) => {
   const { address } = req.body;
   const score = await blockchainScore(address);
-  console.log(score);
+  console.log("score:" ,score);
   return res.status(HttpStatusCodes.OK).json({
     success: true,
     data: { score },
