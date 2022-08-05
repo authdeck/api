@@ -12,7 +12,7 @@ function generateJWTToken(payload) {
 // @route   POST /api/user
 // @desc    Get user data ( used by dapps )
 // @access  Restricted
-const getUserApp = async (req, res, next) => {
+const getUserApp = async (req, res) => {
   // todo: API key, and log to app
   return res.status(HttpStatusCodes.OK).json({
     success: true,
@@ -23,7 +23,7 @@ const getUserApp = async (req, res, next) => {
 // @route   POST /api/@me
 // @desc    Get logged in user data
 // @access  Private
-const getUser = async (req, res, next) => {
+const getUser = async (req, res) => {
   const user = await UserModel.findById(req.user)
   if (!user) {
     return res.status(HttpStatusCodes.BAD_REQUEST).json({
@@ -41,7 +41,7 @@ const getUser = async (req, res, next) => {
 // @route   POST /api/user/login
 // @desc    Login/Signup to app
 // @access  Public
-const loginUser = async (req, res, next) => {
+const loginUser = async (req, res) => {
   const ethAuth = new ETHAuth()
   const proof = await ethAuth.decodeProof(req.body.proofString).catch((err) => {
     console.log(err)

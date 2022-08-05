@@ -1,50 +1,60 @@
-import { createRequire } from "module"; // Bring in the ability to create the 'require' method
-const require = createRequire(import.meta.url); // construct the require method
-const curated_theme_contracts = require("./curated_theme_contracts.json");
-import getJanamKundali from "./chainData.js";
-import findScore from "./findScore.js";
-import queryClients from "./functions/index.js";
+import { createRequire } from 'module' // Bring in the ability to create the 'require' method
+const require = createRequire(import.meta.url) // construct the require method
+const curated_theme_contracts = require('./curated_theme_contracts.json')
+import getJanamKundali from './chainData.js'
+import findScore from './findScore.js'
+import queryClients from './functions/index.js'
+
+const allowedQueries = Object.keys(queryClients)
 
 const blockchainScore = async (address) => {
-  const query = cleanQueries(JSON.parse(process.env.QUERY));
-  const queries = Object.keys(query);
-
-  const data = {};
-  const janamKundali = await getJanamKundali(address);
+  console.log(allowedQueries)
+  const query = cleanQueries(JSON.parse(process.env.QUERY))
+  const queries = Object.keys(query)
+  console.log('queries', queries)
+  /*
+  const errors = queries.filter((query) => !allowedQueries.includes(query))
+  if (errors.length > 0) {
+    console.log('QUERY NOT ALLOWED')
+    return -1
+  }
+  */
+  const data = {}
+  const janamKundali = await getJanamKundali(address)
   await Promise.all(
     queries.map(async (queryy) => {
       data[queryy] = await queryClients[queryy](
         janamKundali,
         query[queryy].query || undefined,
         address
-      );
+      )
     })
-  );
-  const levels = {};
+  )
+  const levels = {}
   Object.keys(data).forEach((query) => {
-    levels[query] = findScore(query, data[query]);
-  });
-  let finalScore = 0;
+    levels[query] = findScore(query, data[query])
+  })
+  let finalScore = 0
   await Promise.all([
     queries.forEach(async (queryy) => {
-      finalScore += levels[queryy] * (query[queryy].weight || 1);
+      finalScore += levels[queryy] * (query[queryy].weight || 1)
     }),
-  ]);
-  return finalScore;
-};
-
-function cleanQueries(query) {
-  let cleaned = {};
-  Object.keys(query).forEach((key) => {
-    if (typeof query[key] === Object) {
-      cleaned[key] = cleanQueries(query[key]);
-    } else if (typeof query[key] === Array) {
-      console.log("");
-    } else {
-      cleaned[key] = curated_theme_contracts[query[key]] || query[key];
-    }
-  });
-  return cleaned;
+  ])
+  return finalScore
 }
 
-export default blockchainScore;
+function cleanQueries(query) {
+  let cleaned = {}
+  Object.keys(query).forEach((key) => {
+    if (typeof query[key] === Object) {
+      cleaned[key] = cleanQueries(query[key])
+    } else if (typeof query[key] === Array) {
+      console.log('')
+    } else {
+      cleaned[key] = curated_theme_contracts[query[key]] || query[key]
+    }
+  })
+  return cleaned
+}
+
+export default blockchainScore
