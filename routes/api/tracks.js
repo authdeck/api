@@ -10,9 +10,10 @@ import {
   getBlockchainScore,
   handleCaptcha,
 } from '../../controllers/tracks.js'
+import auth from '../../middleware/auth.js'
 
-router.post('/captcha', handleCaptcha)
-router.post('/twitter', verifyTwitter)
-router.post('/blockchain', getBlockchainScore)
+router.post('/captcha', auth, handleCaptcha)
+router.post('/twitter', auth, verifyTwitter)
+router.post('/blockchain', auth, getBlockchainScore)
 
 export default router
