@@ -20,7 +20,7 @@ const getUserApp = async (req, res) => {
   })
 }
 
-// @route   POST /api/@me
+// @route   POST /api/user/@me
 // @desc    Get logged in user data
 // @access  Private
 const getUser = async (req, res) => {

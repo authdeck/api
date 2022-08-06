@@ -37,10 +37,28 @@ const userSchema= new mongoose.Schema({
         type: String,
       },
       score: {
-        type: Number,
+        type: String,
       },
     },
   ],
+  availableTracks: {
+    type: [
+    {
+      name: {
+        type: String,
+      },
+      score: {
+        type: String,
+      },
+    },
+    ],
+    default: [
+      {
+        name: "blockchain",
+        score: "100+"
+      },
+    ]
+  },
   blockchainScore: {
     type: Number,
     default: 0,

@@ -27,6 +27,13 @@ const getBlockchainScore = async (req, res) => {
     completedOn: new Date().toISOString(),
     score,
   });
+  // user.availableTracks = user.availableTracks.filter((item) => item.name !== "blockchain");
+  user.availableTracks.splice(
+    user.availableTracks.findIndex((item) => item.name === "blockchain"),
+    1
+  );
+
+  // save user and return data
   await user.save().catch((err) => {
     console.log(err);
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
