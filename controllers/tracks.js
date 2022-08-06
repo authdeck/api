@@ -46,7 +46,7 @@ const getBlockchainScore = async (req, res) => {
     console.log(err);
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
       status: "error",
-      error: err.errors.message,
+      error: err,
     });
   });
   console.log(user);
