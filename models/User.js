@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 /**
  * Interface to model the User Schema for TypeScript.
@@ -9,7 +9,7 @@ import mongoose from 'mongoose'
 
  */
 
-const userSchema= new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   /*
   connectedWallet: [
     {
@@ -43,29 +43,27 @@ const userSchema= new mongoose.Schema({
   ],
   availableTracks: {
     type: [
-    {
-      name: {
-        type: String,
+      {
+        name: {
+          type: String,
+        },
+        score: {
+          type: String,
+        },
+        time: String,
       },
-      score: {
-        type: String,
-      },
-    },
     ],
     default: [
       {
         name: "blockchain",
-        score: "100+"
+        score: "100+",
+        time: "10s",
       },
-    ]
+    ],
   },
-  blockchainScore: {
-    type: Number,
-    default: 0,
-  },
-})
+});
 
 // @ts-ignore
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema);
 
-export default User
+export default User;

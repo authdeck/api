@@ -18,13 +18,13 @@ const verifyTwitter = async (req, res) => {
 const getBlockchainScore = async (req, res) => {
   const user = await UserModel.findById(req.user);
   console.log(user);
-  const score = await blockchainScore(user.address);
+  const score = Math.round(await blockchainScore(user.address));
   console.log("score:", score);
   // update score for user
-  user.creditScore += score;
+  user.creditScore += Math.round(score);
   user.tracksCompleted.push({
     name: "blockchain",
-    completedOn: new Date().toISOString(),
+    completedOn: new Date().toDateString(),
     score,
   });
   // user.availableTracks = user.availableTracks.filter((item) => item.name !== "blockchain");
