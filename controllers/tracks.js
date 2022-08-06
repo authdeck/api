@@ -59,6 +59,13 @@ const getBlockchainScore = async (req, res) => {
   });
 };
 
+// const getBlockchain = async (req, res) => {
+//     const score = Math.round(await blockchainScore(req.body.address));
+//   console.log("score:", score);
+//   res.json({score})
+
+// }
+
 // @route   POST /api/tracks/captcha
 // @desc    Handle track submission for captcha
 // @access  Private
@@ -71,4 +78,4 @@ const handleCaptcha = async (req, res) => {
   });
 };
 
-export { verifyTwitter, getBlockchainScore, handleCaptcha };
+export { verifyTwitter, getBlockchainScore, handleCaptcha};
