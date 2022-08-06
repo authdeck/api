@@ -36,7 +36,7 @@ const verifyTwitter = async (req, res) => {
       error: "tweet doesn't have signature",
     });
   }
-  if (signature[0] !== proof.signature || proof.address !== user.address) {
+  if (signature[0] !== proof.signature) {
     return res.status(HttpStatusCodes.BAD_REQUEST).json({
       status: "error",
       error: "signature doesnt match, try again",
@@ -130,12 +130,11 @@ const getBlockchainScore = async (req, res) => {
   });
 };
 
-// const getBlockchain = async (req, res) => {
-//     const score = Math.round(await blockchainScore(req.body.address));
-//   console.log("score:", score);
-//   res.json({score})
-
-// }
+const getBlockchain = async (req, res) => {
+  const score = Math.round(await blockchainScore(req.body.address));
+  console.log("score:", score);
+  res.json({ score });
+};
 
 // @route   POST /api/tracks/captcha
 // @desc    Handle track submission for captcha
@@ -185,4 +184,4 @@ const handleCaptcha = async (req, res) => {
   });
 };
 
-export { verifyTwitter, getBlockchainScore, handleCaptcha };
+export { verifyTwitter, getBlockchainScore, handleCaptcha, getBlockchain };
