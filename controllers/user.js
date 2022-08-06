@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
       error: 'INVALID PROOF',
     })
   })
-  console.log(proof)
+  console.log("proof", proof)
   if (!proof) {
     return res.status(HttpStatusCodes.BAD_REQUEST).json({
       status: 'error',
