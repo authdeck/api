@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema({
   ],
   */
   // only eth for now
-  address: String,
+  address: {
+    type: String,
+    unique: true,
+    index: true,
+  },
   creditScore: {
     type: Number,
     default: 0,
@@ -63,7 +67,8 @@ const userSchema = new mongoose.Schema({
         name: "captcha",
         score: "10",
         time: "1min",
-      },{
+      },
+      {
         name: "twitter",
         score: "20",
         time: "1min",

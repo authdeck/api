@@ -5,6 +5,7 @@ export default function (req, res, next) {
   // Get token from header
   const token = req.header('Authorization')
 
+  console.log(token);
   // Check if no token
   if (!token) {
     return res

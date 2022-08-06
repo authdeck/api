@@ -57,10 +57,12 @@ const verifyTwitter = async (req, res) => {
     score: 10,
   });
   user.creditScore += 20;
-  user.availableTracks.splice(
-    user.availableTracks.findIndex((item) => item.name === "twitter"),
-    1
-  );
+  if (track.length < 0) {
+    user.availableTracks.splice(
+      user.availableTracks.findIndex((item) => item.name === "twitter"),
+      1
+    );
+  }
 
   // save user and return data
   await user.save().catch((err) => {
@@ -103,10 +105,12 @@ const getBlockchainScore = async (req, res) => {
     score,
   });
   // user.availableTracks = user.availableTracks.filter((item) => item.name !== "blockchain");
-  user.availableTracks.splice(
-    user.availableTracks.findIndex((item) => item.name === "blockchain"),
-    1
-  );
+  if (track.length <= 0) {
+    user.availableTracks.splice(
+      user.availableTracks.findIndex((item) => item.name === "blockchain"),
+      1
+    );
+  }
 
   // save user and return data
   await user.save().catch((err) => {
@@ -137,11 +141,47 @@ const getBlockchainScore = async (req, res) => {
 // @desc    Handle track submission for captcha
 // @access  Private
 const handleCaptcha = async (req, res) => {
-  // get data from frontend, add score to user
+  const { token, ekey } = req.body;
+  // i have no idea what to do with this
+  console.log(token, ekey);
+  const user = await UserModel.findById(req.user);
+
+  // check if captcha exists in tracksCompleted, if yes, then remove from array and reduce credit score, then update
+  const track = user.tracksCompleted.filter((e) => e.name === "captcha");
+  if (track.length > 0) {
+    user.tracksCompleted = user.tracksCompleted.filter(
+      (e) => e.name !== "captcha"
+    );
+    user.creditScore -= 10;
+  }
+  user.tracksCompleted.push({
+    name: "captcha",
+    completedOn: new Date().toDateString(),
+    score: 10,
+  });
+  user.creditScore += 10;
+  if (track.length < 0) {
+    user.availableTracks.splice(
+      user.availableTracks.findIndex((item) => item.name === "captcha"),
+      1
+    );
+  }
+
+  // save user and return data
+  await user.save().catch((err) => {
+    console.log(err);
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({
+      status: "error",
+      error: "error saving user",
+    });
+  });
 
   return res.status(HttpStatusCodes.OK).json({
     success: true,
-    data: {},
+    data: {
+      status: "ok",
+      data: { user },
+    },
   });
 };
 
