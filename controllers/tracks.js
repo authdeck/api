@@ -21,6 +21,14 @@ const getBlockchainScore = async (req, res) => {
   const score = Math.round(await blockchainScore(user.address));
   console.log("score:", score);
   // update score for user
+  
+  // check if blockchain exists in tracksCompleted, if yes, then remove from array and reduce credit score, then update
+  const track = user.tracksCompleted.filter(e => e.name === "blockchain");
+  if (track.length > 0) {
+    user.creditScore -= track[0].score;
+    user.tracksCompleted.splice(user.tracksCompleted.indexOf(track[0]), 1);
+  }
+
   user.creditScore += Math.round(score);
   user.tracksCompleted.push({
     name: "blockchain",
