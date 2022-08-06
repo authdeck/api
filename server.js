@@ -5,11 +5,11 @@ import morgan from 'morgan'
 import user from './routes/api/user.js'
 import tracks from './routes/api/tracks.js'
 import cors from "cors"
-// const corsOptions = {
-//   origin: "*",
-//   credentials: true,
-//   optionSuccessStatus: 200,
-// };
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
 config({ path: './config/.env' })
 
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI, (err) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
-app.use(cors());
+app.use(cors(corsOptions));
 
 // @route   GET /
 // @desc    Test Base API

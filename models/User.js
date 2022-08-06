@@ -63,6 +63,10 @@ const userSchema = new mongoose.Schema({
         name: "captcha",
         score: "10",
         time: "1min",
+      },{
+        name: "twitter",
+        score: "20",
+        time: "1min",
       },
     ],
   },
