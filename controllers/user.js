@@ -71,11 +71,15 @@ const loginUser = async (req, res) => {
   }
 
   let user;
-  user = await UserModel.findOne({ address: proof.address });
-  if (!user) {
+  const isUser = await UserModel.exists({ address: proof.address });
+  console.log("isUser", isUser);
+  if (!isUser) {
     user = await UserModel.create({ address: proof.address });
+  } else {
+    user = await UserModel.findOne({ address: proof.address });
   }
   const token = generateJWTToken({ id: user._id });
+  console.log("token", token);
   return res.status(HttpStatusCodes.OK).json({
     status: "ok",
     data: {

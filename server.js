@@ -5,9 +5,9 @@ import morgan from 'morgan'
 import user from './routes/api/user.js'
 import tracks from './routes/api/tracks.js'
 import cors from "cors"
+
 const corsOptions = {
-  origin: "*",
-  credentials: true,
+  origin: "https://app.authdeck.xyz",
   optionSuccessStatus: 200,
 };
 
