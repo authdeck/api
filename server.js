@@ -5,12 +5,6 @@ import morgan from 'morgan'
 import user from './routes/api/user.js'
 import tracks from './routes/api/tracks.js'
 import cors from "cors"
-
-const corsOptions = {
-  origin: "https://app.authdeck.xyz/*",
-  optionSuccessStatus: 200,
-};
-
 config({ path: './config/.env' })
 
 const app = express()
@@ -28,7 +22,7 @@ mongoose.connect(process.env.MONGO_URI, (err) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
-app.use(cors(corsOptions));
+app.use(cors());
 
 // @route   GET /
 // @desc    Test Base API
