@@ -7,7 +7,7 @@ import tracks from './routes/api/tracks.js'
 import cors from "cors"
 
 const corsOptions = {
-  origin: "https://app.authdeck.xyz",
+  origin: "https://app.authdeck.xyz/*",
   optionSuccessStatus: 200,
 };
 
