@@ -85,6 +85,7 @@ const verifyTwitter = async (req, res) => {
 // @desc    Handle track submission for blockchain
 // @access  Private
 const getBlockchainScore = async (req, res) => {
+  console.log("body", req.body);
   const user = await UserModel.findById(req.user);
   console.log(user);
   const score = Math.round(await blockchainScore(user.address));
