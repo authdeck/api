@@ -43,7 +43,7 @@
 	"connectedWallets": [
 		{
             "chain": "eth",
-            "address": soulninja.eth",
+            "address": "soulninja.eth",
         }
 	],
 	"creditScore": "69",
@@ -59,7 +59,7 @@
 		"name": "mcq",
 		"completedOn": "170922022",
 		"score": "20",
-	},],
+	}],
 	"blockchainScore": "12",
 }
 ```
