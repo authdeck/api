@@ -63,11 +63,11 @@ const userSchema = new mongoose.Schema({
         score: "100+",
         time: "10s",
       },
-      {
-        name: "captcha",
-        score: "10",
-        time: "1min",
-      },
+      // {
+      //   name: "captcha",
+      //   score: "10",
+      //   time: "1min",
+      // },
       // {
       //   name: "twitter",
       //   score: "20",
